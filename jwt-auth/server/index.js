@@ -2,12 +2,26 @@ const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth')
 const logoutRoutes = require('./routes/logout')
-const refresh = require('./routes/refresh')
-const {verifyJwt} = require('./middleware/verify-jwt')
+const refreshRoutes = require('./routes/refresh');
+const protectedRoutes = require('./routes/protected-routes')
+const {verifyJwt} = require('./middleware/verify-jwt');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 
 const app = express();
+
+
+app.use(express.json());
+
+app.use(cookieParser());
+
+app.use(authRoutes);
+app.use(refreshRoutes);
+app.use(logoutRoutes);
+app.use(verifyJwt);
+app.use(protectedRoutes);
+
 
 
 const startServer = async() => {
