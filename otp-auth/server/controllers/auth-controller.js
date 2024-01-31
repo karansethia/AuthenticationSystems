@@ -48,7 +48,7 @@ const verifyController = async(req,res) => {
     totp.options = { step: 86400 }
     try {
       const newAccessOtp= totp.generate(process.env.ACCESS_OTP_SECRET)
-      const newUser = {name: name, mobile: mobileNum}
+      const newUser = {name: name, mobile: mobileNum, accessOtp: newAccessOtp}
       await User.create(newUser);
       return res.status(201).json({newAccessOtp})
     } catch (error) {
