@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(authRoutes);
 app.use(refreshRoutes);
 app.use(logoutRoutes);
-app.use(verifyJwt);
+// app.use(verifyJwt);
 app.use(protectedRoutes);
 
 
@@ -28,7 +28,7 @@ const startServer = async() => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("app running");
-    app.listen(8080);
+    app.listen(3000);
   } catch (error) {
   console.log(error);  
   }
