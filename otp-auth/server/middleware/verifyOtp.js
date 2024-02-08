@@ -1,14 +1,16 @@
-import { totp } from "otplib";
+const { authenticator } = require("otplib");
 require('dotenv').config();
 const User = require('../model/user')
 
+
+// todo change the accessOTP to authHeader
 const verifyOtp = async(req,res,next) => {
 // verify the accessOTP from client
-const { accessOtp } = req.otp;
+// const { accessOtp } = req.body;
 if(!accessOtp){
   return res.status(402);
 }
-const isValid = totp.check(accessOtp, process.env.ACCESS_OTP_SECRET);
+const isValid = authenticator.check(accessOtp, process.env.ACCESS_OTP_SECRET);
 if(!isValid){
   return res.status(403);
 }

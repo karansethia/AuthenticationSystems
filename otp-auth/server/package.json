@@ -4,7 +4,7 @@
   "description": "server for OTP-AUTH",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "test": "nodemon index.js"
   },
   "author": "Karan Sethia",
