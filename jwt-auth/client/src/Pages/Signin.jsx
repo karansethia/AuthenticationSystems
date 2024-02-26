@@ -4,6 +4,8 @@ import {useSearchParams} from "react-router-dom";
 import Login from "../Components/Login";
 
 const Signin = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const type = searchParams.get("type");
   return (
     <div className="relative isolate px-3 lg:px-8">
       <div
@@ -18,8 +20,8 @@ const Signin = () => {
           }}
         />
       </div>
-      <Register />
-      <Login />
+      {type === "login" && <Login />}
+      {type === "register" && <Register />}
     </div>
   );
 };

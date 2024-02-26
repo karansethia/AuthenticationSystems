@@ -1,14 +1,15 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 const Register = () => {
   return (
     <div className="flex min-h-full flex-col justify-center px-3 py-12 lg:px-8">
-      <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+      <h2 className=" text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
         Create a new Account
       </h2>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-5" action="#" method="POST">
+        <form className="space-y-5">
           <div>
             <label
               for="name"
@@ -77,12 +78,12 @@ const Register = () => {
         </form>
         <p className="mt-5 text-center text-sm text-gray-500">
           Already have an Account?{" "}
-          <a
-            href="#"
+          <Link
+            to={{pathname: "/signin", search: "?type=login"}}
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>
