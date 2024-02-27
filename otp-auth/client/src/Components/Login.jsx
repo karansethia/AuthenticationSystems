@@ -13,7 +13,7 @@ const Login = ({mobile, onPhoneChange, onPhoneSubmit}) => {
   //   </form>
   // );
   return (
-    <div className="flex flex-col mt-6 justify-center px-3 py-12 lg:px-8 border-2 w-2/5 shadow-lg rounded-xl m-auto">
+    <div className="flex flex-col mt-6 justify-center px-3 py-12 lg:px-8 border-2 w-2/5 shadow-lg rounded-xl m-auto bg-white">
       <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
         Sign in to your account
       </h2>

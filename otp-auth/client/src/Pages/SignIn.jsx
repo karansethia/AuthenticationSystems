@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Login from "../Components/Login";
 import OtpForm from "../Components/OtpForm";
+import Background from "../Components/UI/Background";
 
 const SignIn = () => {
   const [showOtpField, setShowOtpField] = useState(false);
@@ -25,6 +26,7 @@ const SignIn = () => {
   };
   return (
     <div>
+      <Background />
       {!showOtpField ? (
         <Login
           mobile={mobile}
