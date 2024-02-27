@@ -1,18 +1,21 @@
 import React from "react";
-import Dashboard from "./Pages/Dashboard";
+import InfoForm from "./Pages/InfoForm";
 import Home from "./Pages/Home";
 import Account from "./Pages/Account";
+import SignIn from "./Pages/SignIn";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import Root from "./Pages/Root";
 
 const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home />,
+      element: <Root />,
       children: [
-        {path: "/sigin", element: <Signin />},
-        {path: "/route1", element: <Dashboard />},
-        {path: "/route2", element: <Account />},
+        {index: true, element: <Home />},
+        {path: "/signin", element: <SignIn />},
+        {path: "/account", element: <Account />},
+        {path: "/settings", element: <InfoForm />},
       ],
     },
   ]);
