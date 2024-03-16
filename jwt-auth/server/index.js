@@ -6,11 +6,13 @@ const refreshRoutes = require('./routes/refresh');
 const protectedRoutes = require('./routes/protected-routes')
 const {verifyJwt} = require('./middleware/verify-jwt');
 const cookieParser = require('cookie-parser');
+const cors = require('cors')
 require('dotenv').config();
 
 
 const app = express();
 
+app.use(cors())
 
 app.use(express.json());
 

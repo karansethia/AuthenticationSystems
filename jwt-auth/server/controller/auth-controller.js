@@ -5,13 +5,14 @@ const bcrypt = require('bcrypt');
 const registerController = async(req,res) => {
 
   const { name, email, password } = req.body;
+  console.log(name, email, password)
 
   if(!name || !email || !password) {
     return res.status(400);
   }
 
-  const duplicate = await User.find({email: email});
-  if(duplicate.length != 0){
+  const duplicate = await User.findOne({email: email});
+  if(duplicate){
     return res.status(409).json({"message": "Email already registered"});
   }
 
@@ -54,9 +55,10 @@ const loginController = async(req,res) => {
       process.env.REFRESH_TOKEN_SECRET,
       {expiresIn: "1h"}
     );
-    await User.findByIdAndUpdate(foundUser._id,{refreshToken})
+    const newUser = await User.findByIdAndUpdate(foundUser._id,{refreshToken: refreshToken});
+    console.log(newUser)
     res.cookie('jwt',refreshToken,{httpOnly: true});
-    return res.status(201).json({accessToken})
+    return res.status(201).json({accessToken, name: foundUser.name, email: foundUser.email})
   }else{
     return res.status(401).json({"message": "Password incorrect"})
   }

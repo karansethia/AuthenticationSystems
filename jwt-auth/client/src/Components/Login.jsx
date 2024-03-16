@@ -1,7 +1,23 @@
-import React from "react";
+import React, {useContext} from "react";
+import {AuthContext} from "../context/AuthContextProvider";
 import {Link} from "react-router-dom";
+import {useAxios} from "../hooks/use-axios";
 
 const Login = () => {
+  const ctx = useContext(AuthContext);
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const details = {
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
+    const {data, status} = await useAxios("AUTH", "/login", details);
+    console.log(data, status);
+    if (status === 201) {
+      ctx.onLogin(data.email, data.accessToken);
+    }
+  };
   return (
     <div className="flex min-h-full flex-col justify-center px-3 py-12 lg:px-8">
       <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -9,10 +25,10 @@ const Login = () => {
       </h2>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-5" action="#" method="POST">
+        <form className="space-y-5" onSubmit={submitHandler}>
           <div>
             <label
-              for="email"
+              htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
               Email address
@@ -22,7 +38,7 @@ const Login = () => {
                 id="email"
                 name="email"
                 type="email"
-                autocomplete="email"
+                autoComplete="email"
                 required
                 className="input-text"
               />
@@ -32,7 +48,7 @@ const Login = () => {
           <div>
             <div className="flex items-center justify-between">
               <label
-                for="password"
+                htmlFor="password"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Password

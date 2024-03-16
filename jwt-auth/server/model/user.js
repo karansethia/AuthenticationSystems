@@ -13,6 +13,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true 
   },
+  profileDescription:{
+    type: String,
+  },
+  position: {
+    type:String,
+  },
   refreshToken: {
     type: String,
     default: null

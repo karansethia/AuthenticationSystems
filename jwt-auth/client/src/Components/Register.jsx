@@ -1,7 +1,26 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {axiosReq} from "../utils/axios";
+import {useAxios} from "../hooks/use-axios";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const registerHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const details = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
+
+    const response = await useAxios("AUTH", "/register", details);
+    console.log(response);
+    if (response.status === 201) {
+      console.log("user created");
+      navigate("/signin?type=login"); //signin?type=login
+    }
+  };
   return (
     <div className="flex min-h-full flex-col justify-center px-3 py-12 lg:px-8">
       <h2 className=" text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -9,10 +28,11 @@ const Register = () => {
       </h2>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-5">
+        {/* <button onClick={registerHandler}>Do something</button> */}
+        <form className="space-y-5" onSubmit={registerHandler}>
           <div>
             <label
-              for="name"
+              htmlFor="name"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
               Name
@@ -22,7 +42,6 @@ const Register = () => {
                 id="name"
                 name="name"
                 type="text"
-                autocomplete="name"
                 required
                 className="input-text"
               />
@@ -30,7 +49,7 @@ const Register = () => {
           </div>
           <div>
             <label
-              for="email"
+              htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
               Email address
@@ -40,7 +59,6 @@ const Register = () => {
                 id="email"
                 name="email"
                 type="email"
-                autocomplete="email"
                 required
                 className="input-text"
               />
@@ -50,7 +68,7 @@ const Register = () => {
           <div>
             <div className="flex items-center justify-between">
               <label
-                for="password"
+                htmlFor="password"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Password

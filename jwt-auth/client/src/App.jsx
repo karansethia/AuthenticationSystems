@@ -5,6 +5,7 @@ import Layout from "./Pages/Layout";
 import Error from "./Pages/Error";
 import Account from "./Pages/Account";
 import InfoForm from "./Pages/InfoForm";
+import AuthContextProvider from "./context/AuthContextProvider";
 function App() {
   const router = createBrowserRouter([
     {
@@ -29,7 +30,11 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <AuthContextProvider>
+      <RouterProvider router={router} />;
+    </AuthContextProvider>
+  );
 }
 
 export default App;

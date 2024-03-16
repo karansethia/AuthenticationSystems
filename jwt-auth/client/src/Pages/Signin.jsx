@@ -1,11 +1,15 @@
 import React from "react";
 import Register from "../Components/Register";
-import {useSearchParams} from "react-router-dom";
+import {useSearchParams, useNavigate} from "react-router-dom";
 import Login from "../Components/Login";
+import {axiosReq} from "../utils/axios";
 
 const Signin = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+
   const type = searchParams.get("type");
+  console.log(type);
+
   return (
     <div className="relative isolate px-3 lg:px-8">
       <div
