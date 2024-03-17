@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import {AuthContext} from "../context/AuthContextProvider";
-import {useAxios} from "../hooks/use-axios";
+import {toast} from "sonner";
 import {useUpdateUser} from "../hooks/use-axios";
 const InfoForm = () => {
   const ctx = useContext(AuthContext);
@@ -13,7 +13,14 @@ const InfoForm = () => {
       profileDescription: formData.get("profileDescription"),
     };
     console.log();
-    updateUser(details);
+    updateUser(details, {
+      onSuccess: () => {
+        toast.success("User updated succesfully");
+      },
+      onError: () => {
+        toast.error("Unable to update user");
+      },
+    });
   };
   return (
     <div className="w-full p-10 relative">

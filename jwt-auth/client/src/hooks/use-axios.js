@@ -9,48 +9,7 @@ console.log("inside hook");
     const response = await axiosReq.post(route,{...details});
     return {data: response.data, status:response.status};
   }
-  if(type==="GET"){
-    console.log("inside get");
-    const ctx = useContext(AuthContext)
-    console.log(ctx.token);
-    const getUserData = async() => {
-      const response = await axiosReq.get(route,{
-        headers: {
-          Authorization: `Bearer ${ctx.token}`
-        }
-      })
-      return response
-    } 
-    const {data, isLoading, isError, error} = useQuery({
-      queryKey: ["user"],
-      queryFn: getUserData
-    })
-    if(isError && error){
-      throw new Error("SOmething went wrong")
-    }
-    return {data, isLoading}
-  }
-if(type === "POST"){
-  console.log("inside post");
-  const postUserData = async(formData) => {
-    const ctx = useContext(AuthContext)
-    const response = await axiosReq.post(route,{...formData},{
-        headers: {
-          Authorization: `Bearer ${ctx.token}`
-        }
-      });
-    console.log(response);
-    return response;
-  }
-  const {mutate: updateUser,isPending, isError, error} = useMutation({
-    mutationFn: postUserData,
-  });
-  if(isError && error){
-    console.log(error.message);
-    throw new Error("Something went wrong");
-  }
-  return {updateUser, isPending}
-}
+  
 }
 
 export const useGetUser = () => {

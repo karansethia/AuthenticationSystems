@@ -1,5 +1,5 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-
+import {Toaster} from "sonner";
 import Signin from "./Pages/Signin";
 import Home from "./Pages/Home";
 import Layout from "./Pages/Layout";
@@ -33,6 +33,7 @@ function App() {
 
   return (
     <AuthContextProvider>
+      <Toaster />
       <RouterProvider router={router} />
     </AuthContextProvider>
   );

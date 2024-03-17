@@ -1,6 +1,6 @@
 import React from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {axiosReq} from "../utils/axios";
+import {toast} from "sonner";
 import {useAxios} from "../hooks/use-axios";
 
 const Register = () => {
@@ -17,7 +17,7 @@ const Register = () => {
     const response = await useAxios("AUTH", "/register", details);
     console.log(response);
     if (response.status === 201) {
-      console.log("user created");
+      toast.success("Registered successfully");
       navigate("/signin?type=login"); //signin?type=login
     }
   };
