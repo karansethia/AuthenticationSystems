@@ -1,13 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { verifyJwt } = require('../middleware/verify-jwt')
-router.get('/secure-route',verifyJwt,(req,res) => {
-  console.log("in secure route");
-  res.status(201).json({"message" : "Congratulations!! You can access this GET route "})
-})
-router.post('/secure-route-two',(req,res) => {
-  res.status(201).json({"message" : "Congratulations!! You can access this POST route"})
-})
+const {getUserDetailsController, postUserDetailsController}  = require('../controller/protected-route-controller')
+router.get('/secure-route',verifyJwt ,getUserDetailsController);
+router.post('/secure-route-two', verifyJwt ,postUserDetailsController)
 
 
 module.exports = router;

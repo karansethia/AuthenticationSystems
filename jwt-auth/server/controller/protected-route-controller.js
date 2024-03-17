@@ -1,4 +1,4 @@
-import User from '../model/user'
+const User = require('../model/user')
 const getUserDetailsController = async(req,res) => {
     const email = req.email;
     try{
@@ -7,9 +7,9 @@ const getUserDetailsController = async(req,res) => {
     if(!foundUser){
         return res.status(403).json({message: "User not found"});
     }
-    return res.json(200).json({name: foundUser.name, email: foundUser.email, profileDescription: foundUser.profileDescription, postion: foundUser.position})
+    return res.status(200).json({name: foundUser.name, email: foundUser.email, profileDescription: foundUser.profileDescription, position: foundUser.position})
     }catch (e) {
-        res.status(500).json({message: "Something went wrong"})
+        return res.status(500).json({message: "Something went wrong"})
     }
 
 }
@@ -30,4 +30,4 @@ const postUserDetailsController = async(req,res) => {
     }
 }
 
-module.exports = {getUserDetailsController}
+module.exports = {getUserDetailsController, postUserDetailsController}

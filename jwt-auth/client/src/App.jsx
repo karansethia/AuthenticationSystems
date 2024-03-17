@@ -1,5 +1,6 @@
-import Signin from "./Pages/Signin";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+
+import Signin from "./Pages/Signin";
 import Home from "./Pages/Home";
 import Layout from "./Pages/Layout";
 import Error from "./Pages/Error";
@@ -32,7 +33,7 @@ function App() {
 
   return (
     <AuthContextProvider>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </AuthContextProvider>
   );
 }

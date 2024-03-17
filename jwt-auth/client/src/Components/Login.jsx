@@ -15,6 +15,7 @@ const Login = () => {
     const {data, status} = await useAxios("AUTH", "/login", details);
     console.log(data, status);
     if (status === 201) {
+      console.log(data.email, data.accessToken);
       ctx.onLogin(data.email, data.accessToken);
     }
   };
