@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 const verifyJwt = (req,res,next) => {
-  console.log("insode jwt verification");
+  console.log("inside jwt verification middleware");
   const authHeader = req.headers['authorization'];
 
   if(!authHeader){
@@ -15,7 +15,7 @@ const verifyJwt = (req,res,next) => {
     process.env.ACCESS_TOKEN_SECRET,
     (err,decoded) => {
       if(err){
-         return res.status(403).json({"message":"Invalid Credentails"})
+         return res.status(403).json({"message":"Invalid Credentials"})
         }
       req.email = decoded.email;
       next();

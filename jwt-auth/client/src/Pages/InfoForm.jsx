@@ -12,7 +12,7 @@ const InfoForm = () => {
       position: formData.get("position"),
       profileDescription: formData.get("profileDescription"),
     };
-    console.log();
+
     updateUser(details, {
       onSuccess: () => {
         toast.success("User updated succesfully");

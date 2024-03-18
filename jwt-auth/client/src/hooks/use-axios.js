@@ -2,18 +2,18 @@ import { axiosReq } from "../utils/axios";
 import { AuthContext } from "../context/AuthContextProvider";
 import { useContext } from "react";
 import {useQuery, useMutation} from '@tanstack/react-query'
+import {toast} from 'sonner';
+import {useNavigate} from 'react-router-dom';
+export const useAuth = async(route, details) => {
 
-export const useAxios = async(type, route, details) => {
-console.log("inside hook");
-  if(type === "AUTH"){
     const response = await axiosReq.post(route,{...details});
     return {data: response.data, status:response.status};
-  }
   
 }
 
 export const useGetUser = () => {
    const {token} = useContext(AuthContext);
+   const navigate = useNavigate()
    const getUserDataRequest = async() => {
       const response = await axiosReq.get('/secure-route',{
         headers: {
@@ -25,10 +25,16 @@ export const useGetUser = () => {
      const {data:userDetails, isLoading, isError, error} = useQuery({
       queryKey: ["user"],
       queryFn: getUserDataRequest,
+      retry: 1
+
     })
     if(isError && error){
-      console.log(error.message);
-      throw new Error("SOmething went wrong")
+      toast.error("You cant access this without logging in");
+      // setTimeout(() => {
+      //   navigate('/')
+      // }, 5000);
+      
+      
     }
     return {userDetails, isLoading}
 

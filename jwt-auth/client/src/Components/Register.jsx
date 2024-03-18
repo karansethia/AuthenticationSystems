@@ -1,7 +1,7 @@
 import React from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {toast} from "sonner";
-import {useAxios} from "../hooks/use-axios";
+import {useAuth} from "../hooks/use-axios";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -14,11 +14,11 @@ const Register = () => {
       password: formData.get("password"),
     };
 
-    const response = await useAxios("AUTH", "/register", details);
+    const response = await useAuth("/register", details);
     console.log(response);
     if (response.status === 201) {
       toast.success("Registered successfully");
-      navigate("/signin?type=login"); //signin?type=login
+      navigate("/signin?type=login");
     }
   };
   return (
@@ -28,7 +28,6 @@ const Register = () => {
       </h2>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        {/* <button onClick={registerHandler}>Do something</button> */}
         <form className="space-y-5" onSubmit={registerHandler}>
           <div>
             <label

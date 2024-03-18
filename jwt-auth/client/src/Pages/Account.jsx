@@ -1,9 +1,8 @@
-import React, {useState} from "react";
-import {useAxios, useGetUser} from "../hooks/use-axios";
+import React from "react";
+import {useGetUser} from "../hooks/use-axios";
 
 const Account = () => {
   const {userDetails, isLoading} = useGetUser();
-  console.log(userDetails);
 
   return (
     <>

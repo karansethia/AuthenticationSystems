@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import {AuthContext} from "../context/AuthContextProvider";
 import {toast} from "sonner";
 import {Link, useNavigate} from "react-router-dom";
-import {useAxios} from "../hooks/use-axios";
+import {useAuth} from "../hooks/use-axios";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,10 +14,9 @@ const Login = () => {
       email: formData.get("email"),
       password: formData.get("password"),
     };
-    const {data, status} = await useAxios("AUTH", "/login", details);
-    console.log(data, status);
+    const {data, status} = await useAuth("/login", details);
+
     if (status === 201) {
-      console.log(data.email, data.accessToken);
       ctx.onLogin(data.email, data.accessToken);
       toast.success("Logged in successfully");
       navigate("/account");
